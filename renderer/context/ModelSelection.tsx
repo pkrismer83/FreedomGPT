@@ -3,6 +3,8 @@ import socket from "@/socket/socket";
 import { CloudModel } from "@/types/plugin";
 import React, { createContext, useEffect, useState } from "react";
 
+type VSRedistStatus = 'checking' | 'installing' | 'installed' | 'error' | 'not_required';
+
 type ModelContextType = {
   models: CloudModel[];
   selectedModel: CloudModel;
@@ -34,6 +36,8 @@ type ModelContextType = {
     model: string;
   };
   setLocalServer: (server: any) => void;
+  vsRedistStatus: VSRedistStatus;
+  setVsRedistStatus: (status: VSRedistStatus) => void;
 
   continueLength: number;
   setContinueLength: React.Dispatch<React.SetStateAction<number>>;
@@ -55,6 +59,7 @@ const ModelProvider = ({ children }: { children: React.ReactNode }) => {
   const [modelLoaded, setModelLoaded] = useState(true);
   const [continueLength, setContinueLength] = useState<number>(0);
   const [responseLength, setResponseLength] = useState(0);
+  const [vsRedistStatus, setVsRedistStatus] = useState<VSRedistStatus>('not_required');
   const [ramUsage, setRamUsage] = useState({
     totalRAM: 0,
     freeRAM: 0,
@@ -197,6 +202,12 @@ const ModelProvider = ({ children }: { children: React.ReactNode }) => {
         console.log("Disk usage: ", usage);
         setDiskUsage(usage);
       });
+
+    socket &&
+      socket.on("vs_redist_status", (status: string) => {
+        console.log("VS Redist status: ", status);
+        setVsRedistStatus(status as VSRedistStatus);
+      });
   }, []);
 
   const handleGetModels = () => {
@@ -234,6 +245,8 @@ const ModelProvider = ({ children }: { children: React.ReactNode }) => {
         setDiskUsage,
         localServer,
         setLocalServer,
+        vsRedistStatus,
+        setVsRedistStatus,
         continueLength,
         setContinueLength,
         responseLength,
