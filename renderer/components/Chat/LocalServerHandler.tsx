@@ -5,7 +5,7 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const LocalServerHandler: React.FC = () => {
-  const { localServer, setLocalServer, selectedModel } = useModel();
+  const { localServer, setLocalServer, selectedModel, vcRedistStatus } = useModel();
 
   const startServer = () => {
     if (!selectedModel.model) {
@@ -91,6 +91,33 @@ const LocalServerHandler: React.FC = () => {
                 {currentModelPath(selectedModel.id)}
               </span>
             </div>
+            {/* Visual C++ Redistributable status - only show on Windows and when status is relevant */}
+            {vcRedistStatus && vcRedistStatus !== "unknown" && (
+              <div className="mb-2">
+                <span className="font-semibold text-black dark:text-white">
+                  Visual C++ Redistributable:{" "}
+                </span>
+                <span
+                  className={`inline-block px-2 py-1 rounded text-sm ${
+                    vcRedistStatus === "installed"
+                      ? "bg-green-500 text-white"
+                      : vcRedistStatus === "installing"
+                      ? "bg-yellow-500 text-black"
+                      : vcRedistStatus === "error"
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-500 text-white"
+                  }`}
+                >
+                  {vcRedistStatus === "installed"
+                    ? "✓ Installed"
+                    : vcRedistStatus === "installing"
+                    ? "⏳ Installing..."
+                    : vcRedistStatus === "error"
+                    ? "❌ Error"
+                    : vcRedistStatus}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
