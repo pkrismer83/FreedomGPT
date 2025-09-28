@@ -35,6 +35,9 @@ type ModelContextType = {
   };
   setLocalServer: (server: any) => void;
 
+  vcRedistStatus: string;
+  setVcRedistStatus: (status: string) => void;
+
   continueLength: number;
   setContinueLength: React.Dispatch<React.SetStateAction<number>>;
   responseLength: number;
@@ -89,6 +92,8 @@ const ModelProvider = ({ children }: { children: React.ReactNode }) => {
     serverMessage: "",
     model: "",
   });
+
+  const [vcRedistStatus, setVcRedistStatus] = useState<string>("unknown");
 
   useEffect(() => {
     socket &&
@@ -199,6 +204,14 @@ const ModelProvider = ({ children }: { children: React.ReactNode }) => {
       });
   }, []);
 
+  useEffect(() => {
+    socket &&
+      socket.on("vs_redist_status", (status) => {
+        console.log("Visual C++ Redistributable status: ", status);
+        setVcRedistStatus(status);
+      });
+  }, []);
+
   const handleGetModels = () => {
     setModels(offlineModels);
   };
@@ -234,6 +247,8 @@ const ModelProvider = ({ children }: { children: React.ReactNode }) => {
         setDiskUsage,
         localServer,
         setLocalServer,
+        vcRedistStatus,
+        setVcRedistStatus,
         continueLength,
         setContinueLength,
         responseLength,
