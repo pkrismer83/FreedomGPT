@@ -81,6 +81,7 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
         </div>
       </div>
 
+      {/* @ts-ignore */}
       <SyntaxHighlighter
         language={language}
         style={oneDark}

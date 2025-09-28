@@ -15,7 +15,53 @@ Join our Discord server to get the latest updates and to interact with the commu
 [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/h77wvJS4ga)
 
 
-# How to Contribute
+# Automatic Installation (Recommended)
+
+For a hassle-free installation experience, use our automated installation scripts:
+
+## Cross-Platform Installation
+
+**One-command installation using Node.js:**
+```bash
+git clone --recursive https://github.com/ohmplatform/FreedomGPT.git freedom-gpt
+cd freedom-gpt
+node install.js
+```
+
+## Platform-Specific Installation
+
+### Linux/macOS
+```bash
+git clone --recursive https://github.com/ohmplatform/FreedomGPT.git freedom-gpt
+cd freedom-gpt
+./install.sh
+```
+
+### Windows
+```cmd
+git clone --recursive https://github.com/ohmplatform/FreedomGPT.git freedom-gpt
+cd freedom-gpt
+install.bat
+```
+
+The automated installation scripts will:
+- ✅ Detect your operating system and install required dependencies
+- ✅ Initialize git submodules automatically
+- ✅ Install Node.js dependencies with your preferred package manager
+- ✅ Build the llama.cpp server binary
+- ✅ Build the Electron application
+- ✅ Verify the installation was successful
+
+**After installation completes, start the application with:**
+```bash
+yarn start
+# or
+npm start
+```
+
+# Manual Installation (Advanced Users)
+
+If you prefer to install manually or need to customize the installation process:
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/download/)

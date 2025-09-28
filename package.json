@@ -5,6 +5,8 @@
   "description": "Our goal is to illustrate that AI Safety cannot be achieved through censorship. Let information flow freely, no matter how discomforting - because the truth shall set us free.",
   "main": "main/index.js",
   "scripts": {
+    "install-all": "node install.js",
+    "setup": "node install.js",
     "start": "yarn build-electron && electron-forge start",
     "push-update": "yarn version --patch && git push --follow-tags",
     "update-version": "zsh -c 'read -r \"version?Enter new version: \" && yarn version --new-version $version'",
@@ -107,6 +109,7 @@
     "iconsax-react": "^0.0.8",
     "machine-uuid": "^1.2.0",
     "md5-file": "^5.0.0",
+    "minimatch": "^10.0.3",
     "next": "^13.4.4",
     "next-i18next": "^13.3.0",
     "openai": "^3.2.1",
