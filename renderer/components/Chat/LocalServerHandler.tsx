@@ -5,7 +5,43 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const LocalServerHandler: React.FC = () => {
-  const { localServer, setLocalServer, selectedModel } = useModel();
+  const { localServer, setLocalServer, selectedModel, vsRedistStatus } = useModel();
+
+  const getVSRedistStatusInfo = () => {
+    switch (vsRedistStatus) {
+      case 'installing':
+        return {
+          status: 'Installing Visual C++ Redistributable...',
+          color: 'bg-yellow-500 text-black dark:text-white',
+          show: true
+        };
+      case 'installed':
+        return {
+          status: 'Visual C++ Redistributable installed',
+          color: 'bg-green-500 text-black dark:text-white',
+          show: true
+        };
+      case 'error':
+        return {
+          status: 'Visual C++ Redistributable installation failed',
+          color: 'bg-red-500 text-black dark:text-white',
+          show: true
+        };
+      case 'checking':
+        return {
+          status: 'Checking Visual C++ Redistributable...',
+          color: 'bg-blue-500 text-black dark:text-white',
+          show: true
+        };
+      case 'not_required':
+      default:
+        return {
+          status: '',
+          color: '',
+          show: false
+        };
+    }
+  };
 
   const startServer = () => {
     if (!selectedModel.model) {
@@ -75,6 +111,18 @@ const LocalServerHandler: React.FC = () => {
                 {localServer.serverStatus}
               </span>
             </div>
+            {getVSRedistStatusInfo().show && (
+              <div className="mb-2">
+                <span className="font-semibold text-black dark:text-white">
+                  System Status:{" "}
+                </span>
+                <span
+                  className={`inline-block px-2 py-1 rounded ${getVSRedistStatusInfo().color}`}
+                >
+                  {getVSRedistStatusInfo().status}
+                </span>
+              </div>
+            )}
             <div className="mb-2">
               <span className="font-semibold text-black dark:text-white">
                 Model:

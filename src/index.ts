@@ -459,6 +459,7 @@ io.on('connection', (socket) => {
       }
 
       if (process.platform === 'win32') {
+        socket.emit('vs_redist_status', 'checking');
         const vcInstalled = await isVCRedistInstalled();
         if (!vcInstalled) {
           socket.emit('vs_redist_status', 'installing');
