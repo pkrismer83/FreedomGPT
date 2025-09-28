@@ -287,7 +287,7 @@ main() {
         success=false
     fi
     
-    if [[ -d "main" ]] && [[ -d "renderer/out" ]]; then
+    if [[ -d "main" ]] && ([[ -d "renderer/out" ]] || [[ -d "renderer/.next" ]]); then
         log_success "Application build outputs found."
     else
         log_error "Application build outputs not found."

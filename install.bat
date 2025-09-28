@@ -170,8 +170,12 @@ if exist "main" (
     if exist "renderer\out" (
         echo [SUCCESS] Application build outputs found.
     ) else (
-        echo [ERROR] Application build outputs not found.
-        set "success=false"
+        if exist "renderer\.next" (
+            echo [SUCCESS] Application build outputs found.
+        ) else (
+            echo [ERROR] Application build outputs not found.
+            set "success=false"
+        )
     )
 ) else (
     echo [ERROR] Application build outputs not found.

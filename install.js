@@ -235,7 +235,7 @@ function verifyInstallation() {
     }
     
     // Check for application build outputs
-    if (fs.existsSync('main') && fs.existsSync('renderer/out')) {
+    if (fs.existsSync('main') && (fs.existsSync('renderer/out') || fs.existsSync('renderer/.next'))) {
         log.success('Application build outputs found.');
     } else {
         log.error('Application build outputs not found.');
