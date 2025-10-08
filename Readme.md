@@ -126,6 +126,25 @@ OR
 npx yarn docker
 ``` -->
 
+## Security Testing with MobSF
+
+For security testing and analysis of mobile applications, you can use MobSF (Mobile Security Framework) through Docker. We've provided a convenient script to run MobSF:
+
+```bash
+./run-mobsf.sh
+```
+
+This script will:
+- Check if Docker is installed on your system
+- Pull the latest MobSF Docker image
+- Start MobSF on http://localhost:8000
+
+**Prerequisites:**
+- Docker must be installed and running on your system
+- The script requires executable permissions (already set in the repository)
+
+Once started, you can access MobSF at http://localhost:8000 to perform security analysis on mobile applications.
+
 # Credits
 
 This project utilizes several open-source packages and libraries, without which this project would not have been possible:
