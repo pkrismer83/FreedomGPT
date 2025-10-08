@@ -98,3 +98,6 @@ out/
 
 yarn.lock
 package-lock.json
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md
